@@ -1,93 +1,103 @@
 $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
-
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+body, html {
+  // overflow: hidden; //keeps the page from scrolling
 }
 
-/* Space out content a bit */
 body {
+  margin: 0;
+  background-color: #000000;
+}
+
+html,body,.container {
+  height: 100%;
+  weight: 100%;
+}
+
+.container {
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+  height: 100%;
+}
+
+#toprow {
+  background-color: #000000;
+  margin: 0;
+}
+
+#title {
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+#score {
+  color: #ffffff;
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  font-size: 2em;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
+#bottomrow {
+  height: 80px;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  background-color: #000000;
+}
+.col-sm-2 {
+  // margin-bottom: -1000px;
+  // padding-bottom: 1000px;
+  background-color: #000000;
+}
+.col-sm-8 {
+  background-color: gray;
+  background-image: url("/images/moon.jpeg");
+  background-image: url("images/hangmanfinal.png") 0 0;
+  background-repeat: no-repeat;
+  background-size:cover;
+  height: 100%;
+  // margin-bottom: -1000px;
+  // padding-bottom: 1000px;
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+#buttong1 {
+  position: absolute;
+  bottom: 30%;
+  left: 30%;
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
+#buttong2 {
+  position: absolute;
+  bottom: 25%;
+  left: 29.30%;
 }
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+#btn-group {
+  position: absolute;
 }
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-  p + h4 {
-    margin-top: 28px;
-  }
+#hangpole1 {
+  position: absolute;
+  bottom:35%;
+  left: 10%;
 }
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+#hangpole2 {
+  position:absolute;
+  bottom:35%;
+  right:-10%;
+}
+#dashes {
+  font-size: 2em;
+  color: #ff0000;
+  position: absolute;
+  bottom: 42%;
+  left: 30%;
 }
