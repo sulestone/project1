@@ -15,6 +15,7 @@ function wordToSolve(wordArray) {
 }
 
 //checkes for used word and stores them if never used
+//returns true if the word was never used
 function wordChecker(wordToCheck) {
   if (usedWords.indexOf(wordToCheck) === -1) {
     usedWords.push(wordToCheck);
@@ -32,7 +33,7 @@ function createDashes(slots) {
   return updateWord.join("");
 }
 
-
+// searches for the chosen letter in word to be solved
 function findLetter(letter) {
     for (var i = 0; i < currentWord.length; i++) {
       if (currentWord[i] === letter)
@@ -41,14 +42,23 @@ function findLetter(letter) {
     }
     return updateWord.join("");
 }
+// check to see if the letter the computer chose was already used.
+function compLetterCheck() {
 
+}
+// computer chose random letter
+function compPlay () {
+  var randLetter = $("button")[Math.floor(Math.random() * button.length)];
+}
 
+// send the array of word in for one to be randomly chosen
 var currentWord = wordToSolve(words)
 $("#dashes").text(createDashes(currentWord));
 
+// waits for the player to chose a letter
 $("button").click(function () {
   $(this).css("backgroundColor", "white");
-  // $(this).removeAttr("href");
+    this.disabled = true;
   console.log((this).innerHTML);
   var currentLetter = (this).innerHTML;
   $("#dashes").text(findLetter(currentLetter));
