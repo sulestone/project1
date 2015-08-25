@@ -2,7 +2,15 @@
 console.log('Hello World');
 var words = ['POOR', 'STONE', 'SCOLD', 'RACIAL', 'WASTEFUL', 'MICE', 'RUN', 'SQUEAL', 'UNLOCK', 'PLANES', 'SMOGGY'];
 var usedWords = [];
+var usedLetters = [];
 var updateWord = [];
+var letter = [];
+
+
+for (var i = 0; i < $("button").length; i++) {
+  letter[i] = $("button")[i].innerHTML;
+}
+
 //picks a random word from the array and calls wordCheck on chosen word
 function wordToSolve(wordArray) {
   var rand = wordArray[Math.floor(Math.random() * wordArray.length)];
@@ -25,6 +33,7 @@ function wordChecker(wordToCheck) {
     return false;
   }
 }
+
 //figures how many letters are in the word to be solve and prints the dashes
 function createDashes(slots) {
   for (var i = 0; i < slots.length; i++) {
@@ -33,7 +42,18 @@ function createDashes(slots) {
   return updateWord.join("");
 }
 
-// searches for the chosen letter in word to be solved
+//checks to see if the letter was already used
+function checkLetter(letterToCheck) {
+  if (usedLetters.indexOf(letterToCheck) === -1) {
+    usedLetters.push(letterToCheck);
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+//searches for the chosen letter in word to be solved
 function findLetter(letter) {
     for (var i = 0; i < currentWord.length; i++) {
       if (currentWord[i] === letter)
@@ -42,29 +62,34 @@ function findLetter(letter) {
     }
     return updateWord.join("");
 }
-// check to see if the letter the computer chose was already used.
+//check to see if the letter the computer chose was already used.
 function compLetterCheck() {
 
 }
-// computer chose random letter
+//computer chose random letter
 function compPlay () {
-  var randLetter = $("button")[Math.floor(Math.random() * button.length)];
-}
+  var buttons = $("button");
+  var x = Math.floor(Math.random() * buttons.length);
+  playLetter(buttons[x]);
+  // console.log(rand);
+  // playLetter(rand);
+  }
+
 
 // send the array of word in for one to be randomly chosen
 var currentWord = wordToSolve(words)
 $("#dashes").text(createDashes(currentWord));
 
 // waits for the player to chose a letter
-$("button").click(function () {
-  $(this).css("backgroundColor", "white");
-    this.disabled = true;
-  console.log((this).innerHTML);
-  var currentLetter = (this).innerHTML;
+$("button").click(playLetter);
+
+function playLetter(eventOrButton) {
+  eventOrButton = eventOrButton ? eventOrButton.target : eventOrButton;
+  console.log(eventOrButton);
+  console.log('playLetter: eventOrButton = ' + eventOrButton);
+  $(eventOrButton).css("backgroundColor", "white");
+  eventOrButton.disabled = true;
+  console.log(eventOrButton);
+  var currentLetter = (eventOrButton).innerHTML;
   $("#dashes").text(findLetter(currentLetter));
-
-});
-
-// console.log(wordToSolve(words));
-// console.log(usedWords);
-// i++;
+}
