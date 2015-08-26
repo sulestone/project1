@@ -5,11 +5,10 @@ var usedWords = [];
 var usedLetters = [];
 var updateWord = [];
 var letter = [];
+var whosPlay = 0;
+var missedLetters = 0;
+var playerscore = 0;
 
-
-for (var i = 0; i < $("button").length; i++) {
-  letter[i] = $("button")[i].innerHTML;
-}
 
 //picks a random word from the array and calls wordCheck on chosen word
 function wordToSolve(wordArray) {
@@ -37,59 +36,65 @@ function wordChecker(wordToCheck) {
 //figures how many letters are in the word to be solve and prints the dashes
 function createDashes(slots) {
   for (var i = 0; i < slots.length; i++) {
-    updateWord.push('__ ');
+    updateWord.push("__ ");
   }
   return updateWord.join("");
 }
 
-//checks to see if the letter was already used
-function checkLetter(letterToCheck) {
-  if (usedLetters.indexOf(letterToCheck) === -1) {
-    usedLetters.push(letterToCheck);
-    return true;
-  }
-  else {
-    return false;
-  }
+function turnsRemain(letter) {
+  if (currentWord.indexOf(letter) === -1)
+    missedLetters++;
+}
+
+function score() {
+  if (updateWord.indexOf("__ ") === -1)
+    playerscore++;
 }
 
 //searches for the chosen letter in word to be solved
 function findLetter(letter) {
-    for (var i = 0; i < currentWord.length; i++) {
-      if (currentWord[i] === letter)
-        updateWord[i] = letter;
-      else updateWord[i] = updateWord[i];
+  for (var i = 0; i < currentWord.length; i++) {
+    if (currentWord[i] === letter) {
+      updateWord[i] = letter;
     }
-    return updateWord.join("");
-}
-//check to see if the letter the computer chose was already used.
-function compLetterCheck() {
-
-}
-//computer chose random letter
-function compPlay () {
-  var buttons = $("button");
-  var x = Math.floor(Math.random() * buttons.length);
-  playLetter(buttons[x]);
-  // console.log(rand);
-  // playLetter(rand);
+    else {
+      updateWord[i] = updateWord[i];
+    }
   }
-
+  turnsRemain(letter);
+  score();
+  return updateWord.join("");
+}
 
 // send the array of word in for one to be randomly chosen
 var currentWord = wordToSolve(words)
+
 $("#dashes").text(createDashes(currentWord));
 
-// waits for the player to chose a letter
-$("button").click(playLetter);
+$("button").click(function() {
+  if (whosPlay == 0) {
+    whosPlay = 1;
+    var person = prompt("Please enter player's name: ");
+    $("#playerone").text(person);
+    $("#start").css("visibility", "hidden");
+    $("#hanghim").css("visibility", "visible");
+    $("#score").css("visibility", "visible");
+    $("#buttong1").css("visibility", "visible");
+    $("#buttong2").css("visibility", "visible");
+    $("#dashes").css("visibility", "visible");
+  }
+});
 
-function playLetter(eventOrButton) {
-  eventOrButton = eventOrButton ? eventOrButton.target : eventOrButton;
-  console.log(eventOrButton);
-  console.log('playLetter: eventOrButton = ' + eventOrButton);
-  $(eventOrButton).css("backgroundColor", "white");
-  eventOrButton.disabled = true;
-  console.log(eventOrButton);
-  var currentLetter = (eventOrButton).innerHTML;
-  $("#dashes").text(findLetter(currentLetter));
-}
+
+// waits for the player to chose a letter
+$("button").click(function() {
+    $(this).css("backgroundColor", "white");
+    this.disabled = true;
+    var currentLetter = (this).innerHTML;
+     if (missedLetters > 6) {
+  alert("No more turns remaining!");
+    $('#buttong1').load(document.URL + '#buttong1');
+    // $("buttong1").css("visibility", "visible");
+      }
+    $("#dashes").text(findLetter(currentLetter));
+});
