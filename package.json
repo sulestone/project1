@@ -43,7 +43,11 @@
       "quotes": [
         2,
         "single"
-      ]
+      ],
+      "no-alert": 0
+    },
+    "globals": {
+      "$": false
     }
   }
 }
