@@ -64,22 +64,21 @@ html,body,.container {
   position: absolute;
   top: 460px;
   left:249px;
-  // visibility: hidden;
 }
 
 #buttong2 {
   position: absolute;
   top: 500px;
   left: 247px;
-  visibility: hidden;
 }
+
 #btn-group {
   position: relative;
 }
 
 #dashes-container {
-  margin-top: 0;
-  margin-bottom: 0;
+  // margin-top: 0;
+  // margin-bottom: 0;
 }
 
 #dashes {
@@ -89,7 +88,6 @@ html,body,.container {
   margin-left: 320px;
   top: 400px;
   z-index: 3;
-visibility: hidden;
 }
 
 #start {
@@ -99,9 +97,7 @@ visibility: hidden;
   position: absolute;
   top: 300px;
 }
-.btn-lg {
-  background-color: #ff0000;
-}
+
 #hangman-container {
   position: relative;
 }
@@ -115,13 +111,12 @@ visibility: hidden;
   max-height: 100px;
   z-index: 1;
   background-repeat: no-repeat;
-  visibility: hidden;
-}
-#playerone {
-  color: #ffffff;
-  font-size: 2em;
-  margin-bottom: 30px;
-}
-#pturn {
 
+}
+
+#pscore, #moves, #scorekeeper, #move, #movekeeper
+
+{
+  font-size: 2.5em;
+  color: #ff0000;
 }

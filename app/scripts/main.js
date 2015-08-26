@@ -5,8 +5,8 @@ var usedWords = [];
 var usedLetters = [];
 var updateWord = [];
 var letter = [];
-var whosPlay = 0;
-var missedLetters = 0;
+var MOVES = 6;
+var missedLetters = MOVES;
 var playerscore = 0;
 
 
@@ -35,6 +35,7 @@ function wordChecker(wordToCheck) {
 
 //figures how many letters are in the word to be solve and prints the dashes
 function createDashes(slots) {
+  updateWord = [];
   for (var i = 0; i < slots.length; i++) {
     updateWord.push("__ ");
   }
@@ -43,12 +44,21 @@ function createDashes(slots) {
 
 function turnsRemain(letter) {
   if (currentWord.indexOf(letter) === -1)
-    missedLetters++;
+    missedLetters--;
+  $("#movekeeper").text(missedLetters);
+  if(missedLetters === 0) {
+    alert("No more turns remaining!");
+    resetPlay();
+    missedLetters = MOVES;
+  }
 }
 
 function score() {
-  if (updateWord.indexOf("__ ") === -1)
+  if (updateWord.indexOf("__ ") === -1) {
     playerscore++;
+  $("#scorekeeper").text(playerscore);
+  resetPlay();
+  }
 }
 
 //searches for the chosen letter in word to be solved
@@ -66,35 +76,25 @@ function findLetter(letter) {
   return updateWord.join("");
 }
 
+function resetPlay () {
+  $('.btn-info').removeAttr('disabled');
+  $('.btn-info').css('backgroundColor','blue');
+  currentWord = wordToSolve(words)
+  $('#dashes').empty();
+  $("#dashes").text(createDashes(currentWord));
+}
+
 // send the array of word in for one to be randomly chosen
 var currentWord = wordToSolve(words)
 
 $("#dashes").text(createDashes(currentWord));
-
-$("button").click(function() {
-  if (whosPlay == 0) {
-    whosPlay = 1;
-    var person = prompt("Please enter player's name: ");
-    $("#playerone").text(person);
-    $("#start").css("visibility", "hidden");
-    $("#hanghim").css("visibility", "visible");
-    $("#score").css("visibility", "visible");
-    $("#buttong1").css("visibility", "visible");
-    $("#buttong2").css("visibility", "visible");
-    $("#dashes").css("visibility", "visible");
-  }
-});
-
+$("#scorekeeper").text(playerscore);
+$("#movekeeper").text(missedLetters);
 
 // waits for the player to chose a letter
 $("button").click(function() {
     $(this).css("backgroundColor", "white");
     this.disabled = true;
     var currentLetter = (this).innerHTML;
-     if (missedLetters > 6) {
-  alert("No more turns remaining!");
-    $('#buttong1').load(document.URL + '#buttong1');
-    // $("buttong1").css("visibility", "visible");
-      }
     $("#dashes").text(findLetter(currentLetter));
 });
